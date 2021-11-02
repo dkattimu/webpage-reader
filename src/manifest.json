@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "Webpage Narrator",
-    "version": "0.01",
+    "name": "Webpage Narrator (Free Version)",
+    "version": "0.10",
     "description":"Narrate Webpage",
     "background": {
         "service_worker": "background.js"
@@ -15,6 +15,7 @@
     },
     "icons": {
         "32":"icon.png"
-    }
+    },
+    "author":"Dodzi A"
     
 }

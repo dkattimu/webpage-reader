@@ -54,10 +54,9 @@ const narrateWholePage = (debug = true) => {
 };
 
 const narratePage = (debug = true) => {
-	//const text = getWholePageText()
+	
 	if (debug) {
 		console.log(`inside narrateWholePage()`);
-		//console.log(`text: ${text}`)
 	}
 	let range = document.createRange();
 	let body = document.getElementsByTagName("body")[0];
@@ -73,6 +72,12 @@ const narratePage = (debug = true) => {
 
 //---------------------------------------------------------------------
 let changeColorBtn = document.getElementById("narrate-page");
+let narratePageBtn = document.getElementById("narrate-page");
+let narrateSelectionBtn = document.getElementById("narrate-selection");
+let stopNarrationBtn = document.getElementById("narrate-stop");
+//const pauseResumeNarrationBtn = document.getElementById("narrate-pause-resume");
+let themeToggleBtn = document.getElementById("settings-theme")
+
 let origBGColor = document.body.style.backgroundColor;
 //console.log(`Orig BG Color: ${JSON.stringify(origBGColor)}`);
 
@@ -101,15 +106,57 @@ chrome.storage.sync.get("narrateText", (res) => {
 
 chrome.storage.sync.get("color", ({ color }) => {
 	console.log(`Color is: ${JSON.stringify(color)}`);
-	changeColorBtn.style.backgroundColor = color;
+	//changeColorBtn.style.backgroundColor = color;
+    
 });
 
-const narratePageBtn = document.getElementById("narrate-page");
-const narrateSelectionBtn = document.getElementById("narrate-selection");
-const stopNarrationBtn = document.getElementById("narrate-stop");
-const pauseResumeNarrationBtn = document.getElementById("narrate-pause-resume");
-//let textToNarrate = ""
-console.log(narratePageBtn);
+themeToggleBtn.addEventListener('click', ()=> {
+    if(DEBUG_FLAG) {
+        console.log(`inside toggle for theme`)
+    }
+    let themeText = themeToggleBtn.innerText
+    let darkThemeText = "Theme: Dark"
+    let lightThemeText = "Theme: Light"
+    if(themeText==darkThemeText){
+        themeToggleBtn.innerText = lightThemeText
+        updateTheme(false)
+
+    } else if(themeText ==lightThemeText){
+
+        themeToggleBtn.innerText = darkThemeText
+        updateTheme(true)
+    }
+})
+
+/**
+ * 
+ * @param {*} darkTheme 
+ */
+const updateTheme = (darkTheme = True) => {
+    let body = document.getElementsByTagName('body')[0]
+    let html = document.getElementsByTagName('html')[0]
+    let buttons = document.getElementsByTagName('button')//[document.get, narratePageBtn, narrateSelectionBtn, stopNarrationBtn]
+    if (darkTheme){
+       [...buttons].map(btn => {
+            btn.className = 'btn-dark-theme';
+            //btn.style.backgroundColor='black'
+            //btn.style.color='white'
+            console.log(`classname: ${btn.className}`)
+        })
+        themeToggleBtn.className ='btn-dark-theme'
+        body.className = 'body-dark-theme'
+        html.className = 'html-dark-theme'
+    } else {
+        [...buttons].map(btn => {
+            btn.className='btn-light-theme'
+
+
+        })
+        body.className = 'body-light-theme'
+        html.className = 'html-light-theme'
+    }
+
+}
 // When the button is clicked, inject narratePage into current page
 narratePageBtn.addEventListener("click", async () => {
 	if (DEBUG_FLAG) {
@@ -139,7 +186,7 @@ stopNarrationBtn.addEventListener("click", () => {
 	window.speechSynthesis.cancel();
 });
 
-pauseResumeNarrationBtn.addEventListener("click", () => {
+/*pauseResumeNarrationBtn.addEventListener("click", () => {
 	let currText = pauseResumeNarrationBtn.textContent;
 	if (currText == "Pause") {
 		window.speechSynthesis.pause();
@@ -148,7 +195,7 @@ pauseResumeNarrationBtn.addEventListener("click", () => {
 		window.speechSynthesis.resume();
 		pauseResumeNarrationBtn.textContent = "Pause";
 	}
-});
+});*/
 
 window.speechSynthesis.addEventListener("start-narration-selected", () => {
 	narrateSelectionBtn.className = "button-pulse";
@@ -167,3 +214,8 @@ function setPageBackgroundColor() {
 		);
 	});
 }
+
+//TODO:
+// Add option for male/female voice
+// Add CSS for buttons to be depressed when clicked
+// Add option for dark/light theme -DONE
