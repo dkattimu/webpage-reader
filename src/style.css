@@ -10,14 +10,14 @@
 	--btn-text-color: white;
 	--btn-alt-text-color: var(--btn-bg-color);
 	--bg-color-dk: black;
-	--btn-bg-color-dk: rgb(18, 18, 37);
+	--btn-bg-color-dk: rgb(47, 80, 80);
 	--btn-text-color-dk: white;
 	/*inversion*/
 	--btn-bg-color-lt: var(--btn-text-color-dk);
 	--btn-text-color-lt: var(--btn-bg-color-dk);
 
 	--bg-color-lt: white;
-	--btn-border-radius: 10%;
+	--btn-border-radius: 20%;
 }
 
 .btn-dark-theme {
@@ -72,9 +72,21 @@ img {
 	position: "relative";
 	border-radius: 100%;
 	margin-top: 8px;
-	margin-right: 4px;
-	height: 40px;
-	width: 40px;
+	margin-right: 30px;
+	height: 30px;
+	width: 30px;
+	color: darkgreen;
+	/*background-color: aqua;*/
+}
+
+button > img {
+    visibility: visible;
+	position: "relative";
+	border-radius: 100%;
+	margin-top: 0px;
+	margin-right: 0px;
+	height: 20px;
+	width: 20px;
 	color: darkgreen;
 	/*background-color: aqua;*/
 }
@@ -88,13 +100,16 @@ div {
 }
 
 button {
+    visibility: visible;
 	height: auto;
 	width: auto;
-	outline: double 4px rgb(160, 160, 160);
+    opacity: 100%;
+	outline: double 4px rgb(24, 18, 109);
 	/*justify-items: center;*/
 	margin: 8px;
 	border: 2px;
-	padding: 10px;
+	padding-right: 5px;
+    padding-left: 5px;
 	border-radius: var(--btn-border-radius);
 	/*background-color: var(--btn-bg-color);
     color: var(--btn-text-color);*/
@@ -102,7 +117,7 @@ button {
 }
 
 button.current {
-	box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+	box-shadow: 0 0 0 2px rgb(49, 7, 7), 0 0 0 4px rgb(26, 32, 90);
 }
 
 .button-pulse {
@@ -121,6 +136,7 @@ button:active {
     animation: flash 2s infinite linear;
 }
 
+/*********** Animations ***********************************/
 @keyframes pulse {
 	0% {
 		background-color: var(--btn-bg-color);
@@ -160,8 +176,34 @@ button:active {
         opacity: 0;
     }*/
 
-    100%{
+    100% {
         opacity: 1;
     }
     
+}
+/**************Tool Tips***********************/
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text{
+    visibility: hidden;
+
+    /*position of tooltip*/
+    position:absolute;
+    z-index: 1;
+    background-color:rgb(36, 25, 18);
+    padding: 10%;
+    border-radius: 10%;
+    color:white;
+    bottom: 80%;
+    left:10%;
+
+}
+
+
+.tooltip:hover .tooltip-text{
+    visibility: visible;
 }

@@ -6,6 +6,35 @@ if (DEBUG_FLAG) {
 
 // --------------------------------- MVP FXNALITY----------------------
 /**
+ *
+ * @param {*} debug
+ */
+const narratePageOrSelected = (debug = true) => {
+	if (debug) {
+		console.log(`inside narrateWholePage()`);
+	}
+	let text = window.getSelection().toString();
+
+	if (text.length>0) {
+		//narrateSelection()
+		window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+	} else {
+		text = `You did not select any text on this page. So I will narrate the whole page`;
+		window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+
+		let range = document.createRange();
+		let body = document.getElementsByTagName("body")[0];
+		range.selectNodeContents(body);
+		let selection = window.getSelection();
+		selection.removeAllRanges();
+		selection.addRange(range);
+		text = selection.toString(); //document.getSelection();
+		console.log(text);
+		speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+		selection.removeAllRanges();
+	}
+};
+/**
  * Function will narrate what ever is selected
  */
 const narrateSelection = () => {
@@ -54,7 +83,6 @@ const narrateWholePage = (debug = true) => {
 };
 
 const narratePage = (debug = true) => {
-	
 	if (debug) {
 		console.log(`inside narrateWholePage()`);
 	}
@@ -73,10 +101,10 @@ const narratePage = (debug = true) => {
 //---------------------------------------------------------------------
 let changeColorBtn = document.getElementById("narrate-page");
 let narratePageBtn = document.getElementById("narrate-page");
-let narrateSelectionBtn = document.getElementById("narrate-selection");
+//let narrateSelectionBtn = document.getElementById("narrate-selection");
 let stopNarrationBtn = document.getElementById("narrate-stop");
 //const pauseResumeNarrationBtn = document.getElementById("narrate-pause-resume");
-let themeToggleBtn = document.getElementById("settings-theme")
+let themeToggleBtn = document.getElementById("settings-theme");
 
 let origBGColor = document.body.style.backgroundColor;
 //console.log(`Orig BG Color: ${JSON.stringify(origBGColor)}`);
@@ -107,56 +135,55 @@ chrome.storage.sync.get("narrateText", (res) => {
 chrome.storage.sync.get("color", ({ color }) => {
 	console.log(`Color is: ${JSON.stringify(color)}`);
 	//changeColorBtn.style.backgroundColor = color;
-    
 });
 
-themeToggleBtn.addEventListener('click', ()=> {
-    if(DEBUG_FLAG) {
-        console.log(`inside toggle for theme`)
-    }
-    let themeText = themeToggleBtn.innerText
-    let darkThemeText = "Theme: Dark"
-    let lightThemeText = "Theme: Light"
-    if(themeText==darkThemeText){
-        themeToggleBtn.innerText = lightThemeText
-        updateTheme(false)
+themeToggleBtn.addEventListener("click", () => {
 
-    } else if(themeText ==lightThemeText){
+	let themeImgSrc = themeToggleBtn.children[0].src;
+    //console.log(themeToggleBtn.children)
+	let darkImgSrc = "dark.png";
+	let lightImgSrc = "light.png";
 
-        themeToggleBtn.innerText = darkThemeText
-        updateTheme(true)
-    }
-})
+	if (themeImgSrc.includes(darkImgSrc)){
+        themeToggleBtn.children[0].src = lightImgSrc
+		updateTheme(false);
+	} else if (themeImgSrc.includes(lightImgSrc)) {
+		themeToggleBtn.children[0].src = darkImgSrc;
+		updateTheme(true);
+
+        if (DEBUG_FLAG) {
+            console.log(`inside toggle for theme`);
+            console.log(themeImgSrc)
+        }
+	}
+});
 
 /**
- * 
- * @param {*} darkTheme 
+ *
+ * @param {*} darkTheme
  */
 const updateTheme = (darkTheme = True) => {
-    let body = document.getElementsByTagName('body')[0]
-    let html = document.getElementsByTagName('html')[0]
-    let buttons = document.getElementsByTagName('button')//[document.get, narratePageBtn, narrateSelectionBtn, stopNarrationBtn]
-    if (darkTheme){
-       [...buttons].map(btn => {
-            btn.className = 'btn-dark-theme';
-            //btn.style.backgroundColor='black'
-            //btn.style.color='white'
-            console.log(`classname: ${btn.className}`)
-        })
-        themeToggleBtn.className ='btn-dark-theme'
-        body.className = 'body-dark-theme'
-        html.className = 'html-dark-theme'
-    } else {
-        [...buttons].map(btn => {
-            btn.className='btn-light-theme'
-
-
-        })
-        body.className = 'body-light-theme'
-        html.className = 'html-light-theme'
-    }
-
-}
+	let body = document.getElementsByTagName("body")[0];
+	let html = document.getElementsByTagName("html")[0];
+	let buttons = document.getElementsByTagName("button"); //[document.get, narratePageBtn, narrateSelectionBtn, stopNarrationBtn]
+	if (darkTheme) {
+		[...buttons].map((btn) => {
+			btn.className = "btn-dark-theme";
+			//btn.style.backgroundColor='black'
+			//btn.style.color='white'
+			console.log(`classname: ${btn.className}`);
+		});
+		themeToggleBtn.className = "btn-dark-theme";
+		body.className = "body-dark-theme";
+		html.className = "html-dark-theme";
+	} else {
+		[...buttons].map((btn) => {
+			btn.className = "btn-light-theme";
+		});
+		body.className = "body-light-theme";
+		html.className = "html-light-theme";
+	}
+};
 // When the button is clicked, inject narratePage into current page
 narratePageBtn.addEventListener("click", async () => {
 	if (DEBUG_FLAG) {
@@ -167,21 +194,21 @@ narratePageBtn.addEventListener("click", async () => {
 
 	chrome.scripting.executeScript({
 		target: { tabId: tab.id },
-		function: narratePage,
+		function: narratePageOrSelected,
 	});
 });
 
-narrateSelectionBtn.addEventListener("click", async () => {
+/*narrateSelectionBtn.addEventListener("click", async () => {
 	if (DEBUG_FLAG) {
 		console.log("inside narrateSelectionBtn event handler ...");
 	}
 	let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 	chrome.scripting.executeScript({
 		target: { tabId: tab.id },
-		function: narrateSelection,
+		function: narratePageOrSelected, //narrateSelection,
 	});
 });
-
+*/
 stopNarrationBtn.addEventListener("click", () => {
 	window.speechSynthesis.cancel();
 });

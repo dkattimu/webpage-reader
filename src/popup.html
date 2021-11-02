@@ -6,17 +6,37 @@
     </head>
 
     <body class="body-dark-theme">
-         A&A
+        <!-- <script src="https://use.fontawesome.com/46c6a3bb90.js"></script>-->
+        Web Reader by A&A
         <div>
-            <img src="run.png" style="margin-top: 10px " class="elt-flash">
-            <button id="narrate-page" class="btn-dark-theme">Narrate Page</button>
-            <button id="narrate-selection" class="btn-dark-theme">Narrate Selected</button>
+           <!--<img src="run.png" style="margin-top: 10px " class="elt-flash">-->
+            <div class="tooltip">
+                <button id="narrate-page" class="btn-dark-theme">
+                    <img src="narrate.jpg">
+                </button>
+                <span class="tooltip-text">read</span>
+           </div>
+            <!-- <button id="narrate-selection" class="btn-dark-theme">Narrate Selected</button> -->
             <!--<button id="narrate-pause-resume">Pause</button>-->
-            <button id="narrate-stop" class="btn-dark-theme">Stop Narration</button>
+            <div class="tooltip">
+                <button id="narrate-stop" class="btn-dark-theme">
+                    <img src="stop.png">
+                </button>
+                <span class="tooltip-text">stop</span>
+            </div>
+            <div class="tooltip">
+                <button id="settings-theme" class="btn-dark-theme">
+                    <img src="dark.png">
+                </button>
+                <span class="tooltip-text"> toggle theme</span>
+            </div>
         </div>
-        <div>
-            <img src="settings1.png" class="elt-rotate">
-            <button id="settings-theme" class="btn-dark-theme">Theme: Dark</button>
+        <!--<div>
+            <div class="tooltip">
+                <img src="settings1.png" class="elt-rotate">
+                <span class="tooltip-text"> settings</span>
+            </div>-->
+
             <!--<button id="settings-voice">Narrator Voice: Male</button>-->
         </div>
 
