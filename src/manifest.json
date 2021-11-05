@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Webpage Narrator (Free Version)",
-    "version": "0.10",
-    "description":"Narrate Webpage",
+    "name": "Webpage Narrator - Community (Free) Version",
+    "version": "0.2.1",
+    "description":"Narrate text on a webpage",
     "background": {
         "service_worker": "background.js"
     },

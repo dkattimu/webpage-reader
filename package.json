@@ -1,0 +1,26 @@
+{
+  "name": "webpage-reader",
+  "version": "1.0.0",
+  "description": "This is a chromium extension that will read the contents of a web-page \r Plan to test on the following browsers (and oses):\r - chromium (debian)\r - google chrome (windows and macOS)\r - brave (windows)\r - microsoft edge (windows and macOS)",
+  "main": "popup.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkattimu/webpage-reader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dkattimu/webpage-reader/issues"
+  },
+  "homepage": "https://github.com/dkattimu/webpage-reader#readme",
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}

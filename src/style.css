@@ -100,15 +100,17 @@ div {
 }
 
 button {
+    display: flex;
+    flex-direction: row;
     visibility: visible;
 	height: auto;
 	width: auto;
     opacity: 100%;
 	outline: double 4px rgb(24, 18, 109);
 	/*justify-items: center;*/
-	margin: 8px;
+	margin: 5px 15px 15px 15px;
 	border: 2px;
-	padding-right: 5px;
+	padding: 5px;
     padding-left: 5px;
 	border-radius: var(--btn-border-radius);
 	/*background-color: var(--btn-bg-color);
@@ -194,12 +196,16 @@ button:active {
     /*position of tooltip*/
     position:absolute;
     z-index: 1;
-    background-color:rgb(36, 25, 18);
-    padding: 10%;
-    border-radius: 10%;
-    color:white;
-    bottom: 80%;
-    left:10%;
+    background-color:rgb(184, 173, 126);
+    padding: 5px;
+    border-radius: 100%;
+    color:rgb(53, 87, 67);
+    top: 80%;
+    left: 25%;
+    font-size:x-small;
+    font-weight:lighter;
+    text-align: center;
+
 
 }
 
