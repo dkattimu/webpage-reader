@@ -1,7 +1,7 @@
 :root {
 	--body-bg-color: rgb(39, 40, 46);
 	--body-bg-color-dk: var(--body-bg-color);
-	--body-bg-color-lt: rgb(122, 122, 139);
+	--body-bg-color-lt: rgb(173, 173, 194);
 	/*--html-bg-color: rgb(54, 53, 51);*/
 	--html-bg-color-dk: black; /* rgb(54, 53, 51);*/
 	--html-bg-color-lt: white;
@@ -199,7 +199,7 @@ button:active {
     background-color:rgb(184, 173, 126);
     padding: 5px;
     border-radius: 100%;
-    color:rgb(53, 87, 67);
+    color:rgb(16, 26, 20);
     top: 80%;
     left: 25%;
     font-size:x-small;
