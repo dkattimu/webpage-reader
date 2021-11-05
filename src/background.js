@@ -4,7 +4,7 @@ let DEBUG_FLAG = true;
 if (DEBUG_FLAG) {
 	console.log(`background.js is called`);
 }
-
+/*
 let theme_exist;
 try {
 	chrome.storage.sync.get("theme", (res) => {
@@ -25,15 +25,15 @@ try {
 
 finally {
 }
-
+*/
 chrome.runtime.onInstalled.addListener(() => {
 	if (DEBUG_FLAG) {
 		console.log(`Inside onInstalled event handler`);
 	}
 });
-
+/*
 chrome.storage.sync.get("narrateText", (res) => {
 	console.log(
 		`narration text from storage: ${JSON.stringify(res.narrateText)}`
 	);
-});
+});*/

@@ -36,12 +36,12 @@ const narratePageOrSelected = (verbose = true) => {
 		utterance = new SpeechSynthesisUtterance(text);
 		selection.removeAllRanges();
 	}
-
+    /*
 	chrome.storage.sync.set({ "narrateText": text }, () => {
 		if (verbose) {
 			console.log(`Placed the narration text into storage`);
 		}
-	});
+	});*/
 	window.speechSynthesis.speak(utterance);
 };
 
@@ -53,10 +53,10 @@ let themeToggleBtn = document.getElementById("settings-theme");
 
 let origBGColor = document.body.style.backgroundColor;
 //console.log(`Orig BG Color: ${JSON.stringify(origBGColor)}`);
-
+/*
 chrome.storage.sync.get("narrateText", (res) => {
 	console.log(`The text from storage is : ${JSON.stringify(res.narrateText)}`);
-});
+});*/
 
 themeToggleBtn.addEventListener("click", () => {
 	let themeImgSrc = themeToggleBtn.children[0].src;
